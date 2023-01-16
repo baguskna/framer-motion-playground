@@ -4,37 +4,24 @@ import { useRef, useState } from "react";
 
 import styles from "../styles/Home.module.css";
 
-function useParallax(value: MotionValue<number>, distance: number) {
-  return useTransform(value, [0, 1], [-distance, distance]);
-}
-
 const Home: NextPage = () => {
-  const [isActive, setIsActive] = useState(false);
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref });
-  const y = useParallax(scrollYProgress, 300);
-
-  console.log(y);
+  const rotation = useTransform(scrollYProgress, [0, 1], [0, 360]);
 
   return (
     <>
       <div className={styles.container}>
-        <h1>Bagus</h1>
+        <h1>Section 1</h1>
       </div>
-      <div className={styles.container} ref={ref}>
+      <div className={styles.container}>
         <motion.div
           className={styles.block}
-          onClick={() => setIsActive(!isActive)}
-          animate={{
-            transformPerspective: 1200,
-            scale: 1,
-            rotateX: isActive ? 40 : 0,
-            rotateY: isActive ? 4 : 0,
+          ref={ref}
+          style={{
+            rotate: rotation,
           }}
-          // style={{ y }}
-        >
-          DIV
-        </motion.div>
+        ></motion.div>
       </div>
     </>
   );
