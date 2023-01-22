@@ -7,8 +7,10 @@ import {
 } from "framer-motion";
 import type { NextPage } from "next";
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 import styles from "../styles/Home.module.css";
+import Header from "../components/header";
 
 const Home: NextPage = () => {
   const ref = useRef(null);
@@ -37,7 +39,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <motion.div style={{ y: isSticky ? y : threshold }}>
+      {/* <motion.div style={{ y: isSticky ? y : threshold }}>
         <h1>Section 1</h1>
       </motion.div>
       <div className={styles.container}></div>
@@ -51,6 +53,13 @@ const Home: NextPage = () => {
         >
           Div
         </motion.div>
+      </div> */}
+      <Header />
+      <div className="home container">
+        <h2>Welcome to Pizza Joint</h2>
+        <Link href="/base">
+          <button>Create Your Pizza</button>
+        </Link>
       </div>
     </>
   );
